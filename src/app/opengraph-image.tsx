@@ -15,33 +15,24 @@ export default function OgImage() {
           display: "flex",
           position: "relative",
           overflow: "hidden",
+          background: "linear-gradient(135deg, #1a1a2e 0%, #0033a0 100%)",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Background product image */}
+        {/* Product image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://usa.yamaha.com/files/A-S3200_ff387f7a00964c55e2840b223fa1a7e3.jpg?impolicy=resize&imwid=800&imhei=800"
+          src="https://usa.yamaha.com/files/1DF6FEAC9EDF414E8A6B4C0898304E68_12073_4cf4a4eee68d00d5f235d51f02045d25.jpg?impolicy=resize&imwid=800&imhei=800"
           alt=""
           style={{
             position: "absolute",
-            right: "-40px",
+            right: "20px",
             top: "50%",
             transform: "translateY(-50%)",
-            width: "620px",
-            height: "620px",
+            width: "500px",
+            height: "500px",
             objectFit: "contain",
-          }}
-        />
-
-        {/* Dark overlay gradient */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            background:
-              "linear-gradient(to right, #1a1a2e 0%, #1a1a2eee 45%, #1a1a2e99 65%, #1a1a2e44 100%)",
+            opacity: 0.85,
           }}
         />
 
@@ -79,7 +70,7 @@ export default function OgImage() {
               style={{
                 fontSize: 26,
                 fontWeight: 600,
-                color: "#4a90d9",
+                color: "rgba(255,255,255,0.7)",
                 letterSpacing: "6px",
                 textTransform: "uppercase",
               }}
@@ -91,30 +82,12 @@ export default function OgImage() {
           <div
             style={{
               fontSize: 28,
-              color: "rgba(255,255,255,0.5)",
+              color: "rgba(255,255,255,0.55)",
               letterSpacing: "5px",
               textTransform: "uppercase",
-              marginBottom: "32px",
             }}
           >
             Sound Beyond Perfection
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "20px",
-              fontSize: 18,
-              color: "rgba(255,255,255,0.45)",
-            }}
-          >
-            <span>Amplifiers</span>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>/</span>
-            <span>Speakers</span>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>/</span>
-            <span>Turntables</span>
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>/</span>
-            <span>Headphones</span>
           </div>
 
           <div
@@ -123,7 +96,7 @@ export default function OgImage() {
               bottom: 40,
               left: 70,
               fontSize: 18,
-              color: "rgba(255,255,255,0.3)",
+              color: "rgba(255,255,255,0.35)",
             }}
           >
             yamaha.best
