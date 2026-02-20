@@ -47,7 +47,7 @@ export default function Header() {
             </Link>
             <Link
               href="/cart"
-              className="relative mr-2 flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-yamaha-blue transition-colors"
+              className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-yamaha-blue transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ export default function Header() {
               </svg>
               Cart
               {totalItems > 0 && (
-                <span className="absolute -top-2 left-full -translate-x-1 flex h-5 w-5 items-center justify-center rounded-full bg-yamaha-blue text-[10px] font-bold text-white">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-yamaha-blue text-[10px] font-bold text-white">
                   {totalItems}
                 </span>
               )}
