@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, useEffect } from "react";
-import { updatePaymentMethod } from "@/lib/payment-actions";
+import { updatePaymentMethod, deletePaymentMethodAction } from "@/lib/payment-actions";
 import type { PaymentMethod } from "@/data/payment-methods";
 
 export function PaymentForm({ method }: { method: PaymentMethod | null }) {
@@ -64,12 +64,20 @@ export function PaymentForm({ method }: { method: PaymentMethod | null }) {
           <h2 className="text-lg font-semibold text-yamaha-dark">
             Payment Method
           </h2>
-          <button
-            onClick={() => setEditing(true)}
-            className="text-sm font-semibold text-yamaha-blue hover:text-yamaha-dark transition-colors cursor-pointer"
-          >
-            Edit
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setEditing(true)}
+              className="text-sm font-semibold text-yamaha-blue hover:text-yamaha-dark transition-colors cursor-pointer"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => deletePaymentMethodAction()}
+              className="text-sm font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+            >
+              Delete
+            </button>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">

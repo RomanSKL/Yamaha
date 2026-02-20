@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { savePaymentMethod } from "@/data/payment-methods";
+import { savePaymentMethod, deletePaymentMethod } from "@/data/payment-methods";
 import { revalidatePath } from "next/cache";
 
 export async function updatePaymentMethod(
@@ -33,6 +33,17 @@ export async function updatePaymentMethod(
     expiryYear,
   });
 
+  revalidatePath("/profile");
+  return { success: true };
+}
+
+export async function deletePaymentMethodAction() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return { error: "Not authenticated" };
+  }
+
+  await deletePaymentMethod(session.user.id);
   revalidatePath("/profile");
   return { success: true };
 }

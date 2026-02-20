@@ -19,6 +19,11 @@ export async function getPaymentMethod(userId: string): Promise<PaymentMethod | 
   };
 }
 
+export async function deletePaymentMethod(userId: string): Promise<void> {
+  const db = await getDb();
+  await db.collection("paymentMethods").deleteOne({ userId });
+}
+
 export async function savePaymentMethod(userId: string, method: PaymentMethod): Promise<void> {
   const db = await getDb();
   await db.collection("paymentMethods").updateOne(
