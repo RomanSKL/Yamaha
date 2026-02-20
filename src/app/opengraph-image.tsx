@@ -22,7 +22,7 @@ export default function OgImage() {
         {/* Product image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://usa.yamaha.com/files/1DF6FEAC9EDF414E8A6B4C0898304E68_12073_4cf4a4eee68d00d5f235d51f02045d25.jpg?impolicy=resize&imwid=800&imhei=800"
+          src="https://yamaha.best/og-speakers.png"
           alt=""
           style={{
             position: "absolute",
