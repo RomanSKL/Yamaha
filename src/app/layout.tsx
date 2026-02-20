@@ -20,6 +20,18 @@ export const metadata: Metadata = {
   title: "Yamaha Hi-Fi | Premium High-End Audio Equipment",
   description:
     "Discover premium Yamaha Hi-Fi audio equipment — amplifiers, speakers, turntables, receivers, and headphones. Sound beyond perfection.",
+  metadataBase: new URL("https://yamaha.best"),
+  openGraph: {
+    title: "Yamaha Hi-Fi | Premium High-End Audio Equipment",
+    description:
+      "Discover premium Yamaha Hi-Fi audio equipment — amplifiers, speakers, turntables, receivers, and headphones.",
+    url: "https://yamaha.best",
+    siteName: "Yamaha Hi-Fi",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
