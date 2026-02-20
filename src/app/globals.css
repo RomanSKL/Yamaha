@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-yamaha-blue: #0033a0;
+  --color-yamaha-dark: #1a1a2e;
+  --color-yamaha-accent: #4a90d9;
+  --color-yamaha-light: #f0f4f8;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+* {
+  scroll-behavior: smooth;
+}
