@@ -1,3 +1,5 @@
+import { getDb } from "@/lib/mongodb";
+
 export interface Address {
   fullName: string;
   street: string;
@@ -8,13 +10,26 @@ export interface Address {
   country: string;
 }
 
-// In-memory address store (resets on server restart)
-const addresses = new Map<string, Address>();
-
-export function getAddress(userId: string): Address | null {
-  return addresses.get(userId) ?? null;
+export async function getAddress(userId: string): Promise<Address | null> {
+  const db = await getDb();
+  const doc = await db.collection("addresses").findOne({ userId });
+  if (!doc) return null;
+  return {
+    fullName: doc.fullName as string,
+    street: doc.street as string,
+    apartment: doc.apartment as string | undefined,
+    city: doc.city as string,
+    state: doc.state as string,
+    zip: doc.zip as string,
+    country: doc.country as string,
+  };
 }
 
-export function saveAddress(userId: string, address: Address): void {
-  addresses.set(userId, address);
+export async function saveAddress(userId: string, address: Address): Promise<void> {
+  const db = await getDb();
+  await db.collection("addresses").updateOne(
+    { userId },
+    { $set: { userId, ...address } },
+    { upsert: true }
+  );
 }

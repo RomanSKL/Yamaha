@@ -41,12 +41,12 @@ export async function signUpAction(
     return { error: "Password must be at least 6 characters." };
   }
 
-  const existing = findUserByEmail(email);
+  const existing = await findUserByEmail(email);
   if (existing) {
     return { error: "An account with this email already exists." };
   }
 
-  createUser(name, email, password);
+  await createUser(name, email, password);
 
   try {
     await signIn("credentials", {

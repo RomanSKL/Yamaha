@@ -25,7 +25,7 @@ export async function updateAddress(
     return { error: "Please fill in all required fields" };
   }
 
-  saveAddress(session.user.id, {
+  await saveAddress(session.user.id, {
     fullName,
     street,
     apartment: apartment || undefined,

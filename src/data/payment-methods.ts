@@ -1,3 +1,5 @@
+import { getDb } from "@/lib/mongodb";
+
 export interface PaymentMethod {
   cardholderName: string;
   cardNumber: string;
@@ -5,13 +7,23 @@ export interface PaymentMethod {
   expiryYear: string;
 }
 
-// In-memory payment method store (resets on server restart)
-const paymentMethods = new Map<string, PaymentMethod>();
-
-export function getPaymentMethod(userId: string): PaymentMethod | null {
-  return paymentMethods.get(userId) ?? null;
+export async function getPaymentMethod(userId: string): Promise<PaymentMethod | null> {
+  const db = await getDb();
+  const doc = await db.collection("paymentMethods").findOne({ userId });
+  if (!doc) return null;
+  return {
+    cardholderName: doc.cardholderName as string,
+    cardNumber: doc.cardNumber as string,
+    expiryMonth: doc.expiryMonth as string,
+    expiryYear: doc.expiryYear as string,
+  };
 }
 
-export function savePaymentMethod(userId: string, method: PaymentMethod): void {
-  paymentMethods.set(userId, method);
+export async function savePaymentMethod(userId: string, method: PaymentMethod): Promise<void> {
+  const db = await getDb();
+  await db.collection("paymentMethods").updateOne(
+    { userId },
+    { $set: { userId, ...method } },
+    { upsert: true }
+  );
 }

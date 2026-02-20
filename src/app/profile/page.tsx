@@ -52,10 +52,10 @@ export default async function ProfilePage() {
         </div>
 
         {/* Shipping Address */}
-        <AddressForm address={getAddress(session.user.id!)} />
+        <AddressForm address={await getAddress(session.user.id!)} />
 
         {/* Payment Method */}
-        <PaymentForm method={getPaymentMethod(session.user.id!)} />
+        <PaymentForm method={await getPaymentMethod(session.user.id!)} />
 
         {/* Sign Out */}
         <SignOutButton />

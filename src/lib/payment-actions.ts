@@ -26,7 +26,7 @@ export async function updatePaymentMethod(
     return { error: "Invalid card number" };
   }
 
-  savePaymentMethod(session.user.id, {
+  await savePaymentMethod(session.user.id, {
     cardholderName,
     cardNumber,
     expiryMonth,

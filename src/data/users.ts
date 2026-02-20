@@ -1,4 +1,6 @@
 import bcrypt from "bcryptjs";
+import { ObjectId } from "mongodb";
+import { getDb } from "@/lib/mongodb";
 
 export interface User {
   id: string;
@@ -8,27 +10,75 @@ export interface User {
   image?: string;
 }
 
-// In-memory user store (resets on server restart)
-const users: User[] = [];
-
-let nextId = 1;
-
-export function findUserByEmail(email: string): User | undefined {
-  return users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+function toUser(doc: Record<string, unknown>): User {
+  return {
+    id: (doc._id as ObjectId).toHexString(),
+    name: doc.name as string,
+    email: doc.email as string,
+    password: doc.password as string,
+    image: doc.image as string | undefined,
+  };
 }
 
-export function findUserById(id: string): User | undefined {
-  return users.find((u) => u.id === id);
+export async function findUserByEmail(email: string): Promise<User | undefined> {
+  const db = await getDb();
+  const doc = await db
+    .collection("users")
+    .findOne({ email: email.toLowerCase() });
+  return doc ? toUser(doc as Record<string, unknown>) : undefined;
 }
 
-export function createUser(name: string, email: string, password: string): User {
+export async function findUserById(id: string): Promise<User | undefined> {
+  const db = await getDb();
+  let oid: ObjectId;
+  try {
+    oid = new ObjectId(id);
+  } catch {
+    return undefined;
+  }
+  const doc = await db.collection("users").findOne({ _id: oid });
+  return doc ? toUser(doc as Record<string, unknown>) : undefined;
+}
+
+export async function createUser(
+  name: string,
+  email: string,
+  password: string
+): Promise<User> {
+  const db = await getDb();
   const hashed = bcrypt.hashSync(password, 10);
-  const user: User = {
-    id: String(nextId++),
+  const result = await db.collection("users").insertOne({
+    name,
+    email: email.toLowerCase(),
+    password: hashed,
+  });
+  return {
+    id: result.insertedId.toHexString(),
     name,
     email: email.toLowerCase(),
     password: hashed,
   };
-  users.push(user);
-  return user;
+}
+
+export async function upsertGoogleUser(profile: {
+  name: string;
+  email: string;
+  image?: string;
+}): Promise<User> {
+  const db = await getDb();
+  const result = await db.collection("users").findOneAndUpdate(
+    { email: profile.email.toLowerCase() },
+    {
+      $set: {
+        name: profile.name,
+        image: profile.image,
+      },
+      $setOnInsert: {
+        email: profile.email.toLowerCase(),
+        password: "",
+      },
+    },
+    { upsert: true, returnDocument: "after" }
+  );
+  return toUser(result as unknown as Record<string, unknown>);
 }
