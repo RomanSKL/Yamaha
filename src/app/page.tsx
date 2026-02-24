@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import CategorySection from "@/components/CategorySection";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import NewsletterForm from "@/components/NewsletterForm";
 import Link from "next/link";
 
 export default function Home() {
@@ -64,16 +65,7 @@ export default function Home() {
             Get exclusive offers, new product announcements, and audiophile tips
             delivered to your inbox.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 rounded-full border border-gray-600 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yamaha-accent"
-            />
-            <button className="rounded-full bg-yamaha-blue px-8 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
-              Subscribe
-            </button>
-          </div>
+          <NewsletterForm />
         </div>
       </section>
     </>
