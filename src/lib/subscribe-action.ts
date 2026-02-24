@@ -21,8 +21,8 @@ export async function subscribe(
 
   try {
     await sendSubscriptionEmail(email);
-  } catch {
-    // Email saved to DB even if SES fails (e.g. sandbox mode)
+  } catch (err) {
+    console.error("[SES] Failed to send email:", err);
   }
 
   return { success: true };
