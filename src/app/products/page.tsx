@@ -9,25 +9,15 @@ function ProductsContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category") || "all";
   const [activeCategory, setActiveCategory] = useState(categoryParam);
-  const [sortBy, setSortBy] = useState<"default" | "price-asc" | "price-desc">(
-    "default"
-  );
-
   useEffect(() => {
     setActiveCategory(categoryParam);
   }, [categoryParam]);
 
   const filtered = useMemo(() => {
-    let list =
-      activeCategory === "all"
-        ? products
-        : products.filter((p) => p.category === activeCategory);
-
-    if (sortBy === "price-asc") list = [...list].sort((a, b) => a.price - b.price);
-    if (sortBy === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
-
-    return list;
-  }, [activeCategory, sortBy]);
+    return activeCategory === "all"
+      ? products
+      : products.filter((p) => p.category === activeCategory);
+  }, [activeCategory]);
 
   return (
     <>
@@ -59,17 +49,6 @@ function ProductsContent() {
           ))}
         </div>
 
-        <select
-          value={sortBy}
-          onChange={(e) =>
-            setSortBy(e.target.value as "default" | "price-asc" | "price-desc")
-          }
-          className="w-fit rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-yamaha-accent"
-        >
-          <option value="default">Sort: Default</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-        </select>
       </div>
 
       {/* Count */}

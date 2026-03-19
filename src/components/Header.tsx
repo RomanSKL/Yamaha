@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useCart } from "./CartProvider";
 import UserMenu from "./UserMenu";
 
+const DEALER_URL = "https://usa.yamaha.com/support/dealer_locator/index.html";
+
 export default function Header() {
-  const { totalItems } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -45,8 +45,10 @@ export default function Header() {
             >
               About
             </Link>
-            <Link
-              href="/cart"
+            <a
+              href={DEALER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-yamaha-blue transition-colors"
             >
               <svg
@@ -60,16 +62,16 @@ export default function Header() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
                 />
               </svg>
-              Cart
-              {totalItems > 0 && (
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-yamaha-blue text-[10px] font-bold text-white">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
+              Find a Dealer
+            </a>
             <UserMenu />
           </nav>
 
@@ -128,13 +130,15 @@ export default function Header() {
             >
               About
             </Link>
-            <Link
-              href="/cart"
+            <a
+              href={DEALER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-gray-700 hover:text-yamaha-blue"
             >
-              Cart {totalItems > 0 && `(${totalItems})`}
-            </Link>
+              Find a Dealer
+            </a>
             <div className="pt-2 border-t border-gray-100">
               <UserMenu />
             </div>
