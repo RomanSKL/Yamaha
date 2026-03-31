@@ -1,15 +1,9 @@
 import { MongoClient, Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI!;
-
 const options = {};
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
-
-if (!uri) {
-  throw new Error("Please define the MONGODB_URI environment variable in .env.local");
-}
 
 // Cache the client on globalThis to survive Next.js hot reloads in dev
 declare global {
@@ -19,6 +13,11 @@ declare global {
 
 export async function getDb(): Promise<Db> {
   if (cachedDb) return cachedDb;
+
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("Please define the MONGODB_URI environment variable in .env.local");
+  }
 
   if (!cachedClient) {
     if (process.env.NODE_ENV === "development" && global._mongoClient) {

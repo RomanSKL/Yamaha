@@ -15,4 +15,7 @@ jobs:
           host: 45.76.252.245
           username: root
           key: ${{ secrets.VPS_SSH_KEY }}
-          script: cd /var/www/yamaha && git pull && npm install && npm run build && pm2 restart yamaha
+          script: |
+            cd /var/www/yamaha
+            git pull
+            docker compose up --build -d
