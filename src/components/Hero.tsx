@@ -21,9 +21,9 @@ export default function Hero() {
             Yamaha Hi-Fi &middot; High End Audio
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            Sound Beyond
+            Hear the
             <br />
-            <span className="text-yamaha-accent">Perfection</span>
+            <span className="text-yamaha-accent">Difference</span>
           </h1>
           <p className="mt-6 text-lg text-gray-300 max-w-lg leading-relaxed">
             Discover our curated collection of premium amplifiers, speakers,
