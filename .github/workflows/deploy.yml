@@ -18,7 +18,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ci-placeholder
       AWS_SECRET_ACCESS_KEY: ci-placeholder
       SES_FROM_EMAIL: noreply@example.com
-      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: http://localhst:3000
     steps:
       - name: Checkout Yamaha
         uses: actions/checkout@v5
@@ -88,8 +88,8 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: 45.76.252.245
-          username: root
+            host: ${{ secrets.VPS_HOST }}
+                      username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /var/www/yamaha
